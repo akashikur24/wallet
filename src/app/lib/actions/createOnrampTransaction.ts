@@ -29,7 +29,7 @@ export async function createOnRampTransaction(
     },
   });
   await axios
-    .post("http://localhost:3003/hdfcWebhook", {
+    .post(`${process.env.NEXTAUTH_URL}/api/bank-webhook`, {
       token: token,
       user_identifier: Number(session?.user?.id),
       amount: amount * 100,

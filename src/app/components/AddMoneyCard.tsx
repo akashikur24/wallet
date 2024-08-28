@@ -6,15 +6,16 @@ import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { Select } from "./ui/Select";
 import { TextInput } from "./ui/TextInput";
+import { redirect } from "next/navigation";
 
 const SUPPORTED_BANKS = [
   {
     name: "HDFC Bank",
-    redirectUrl: "https://netbanking.hdfcbank.com",
+    redirectUrl: "/",
   },
   {
     name: "Axis Bank",
-    redirectUrl: "https://www.axisbank.com/",
+    redirectUrl: "/",
   },
 ];
 
@@ -23,6 +24,7 @@ export const AddMoney = () => {
     SUPPORTED_BANKS[0]?.redirectUrl
   );
   const [provider, setProvider] = useState(SUPPORTED_BANKS[0]?.name || "");
+  const [loading, setIsloading] = useState<boolean>(false);
   const [value, setValue] = useState(0);
   return (
     <Card title="Add Money">
@@ -52,10 +54,11 @@ export const AddMoney = () => {
         <div className="flex justify-center pt-4">
           <Button
             onClick={async () => {
+              setIsloading((prev) => !prev);
               await createOnRampTransaction(provider, value);
-              window.location.href = redirectUrl || "";
+              setIsloading((prev) => !prev);
             }}
-            loading={false}
+            loading={loading}
           >
             Add Money
           </Button>
