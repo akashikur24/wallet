@@ -7,7 +7,7 @@ import { BalanceCard } from "@/app/components/BalanceCard";
 import { AddMoney } from "@/app/components/AddMoneyCard";
 
 const prisma = new PrismaClient();
-interface OnRampTransaction {
+export interface OnRampTransaction {
   startTime: Date;
   amount: number;
   status: string;

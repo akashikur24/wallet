@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
+import { OnRampTransaction } from "@/app/(dashboard)/transfer/page";
 
 const prisma = new PrismaClient();
 
@@ -19,7 +20,7 @@ export async function GET(req: NextRequest) {
     });
 
     return NextResponse.json(
-      transactions.map((t) => ({
+      transactions.map((t: OnRampTransaction) => ({
         time: t.startTime,
         amount: t.amount,
         status: t.status,
