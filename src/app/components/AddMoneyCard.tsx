@@ -6,7 +6,6 @@ import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { Select } from "./ui/Select";
 import { TextInput } from "./ui/TextInput";
-import { redirect } from "next/navigation";
 
 const SUPPORTED_BANKS = [
   {
