@@ -9,6 +9,7 @@ export function AppbarClient() {
 
   const handleSignOut = async () => {
     await signOut({ redirect: false });
+    router.refresh();
     router.push("/signin");
   };
 
