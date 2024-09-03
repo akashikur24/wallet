@@ -18,7 +18,8 @@ export default function UserSearchComponent() {
   const [search, setSearch] = useState<string>("");
   const [allUserData, setAllUserData] = useState<User[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [paymentModal, setPaymentModal] = useState<boolean>(false); // Initial state should be false
+  const [paymentModal, setPaymentModal] = useState<boolean>(false);
+  const [paymentNumber, setPaymentNumber] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -66,7 +67,10 @@ export default function UserSearchComponent() {
               <p className="text-sm text-gray-400">{item.number}</p>
             </div>
             <Button
-              onClick={() => setPaymentModal((prev) => !prev)}
+              onClick={() => {
+                setPaymentModal((prev) => !prev);
+                setPaymentNumber(item.number);
+              }}
               loading={loading}
             >
               {"Pay"}
@@ -83,7 +87,10 @@ export default function UserSearchComponent() {
             onClick={() => setPaymentModal(false)}
           />
           <div className="modal-content">
-            <SendCard setPaymentModal={setPaymentModal} />
+            <SendCard
+              setPaymentModal={setPaymentModal}
+              paymentNumber={paymentNumber}
+            />
           </div>
         </>
       )}

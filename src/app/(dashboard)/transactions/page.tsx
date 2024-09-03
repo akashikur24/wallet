@@ -1,41 +1,44 @@
-/* eslint-disable import/no-anonymous-default-export */
-/* eslint-disable react/jsx-key */
-import { getServerSession } from "next-auth";
-import { authOptions } from "../../lib/auth";
-import P2pCards from "@/app/components/P2pCards";
+import React from "react";
 import { PrismaClient } from "@prisma/client";
+import P2pCards from "@/app/components/P2pCards";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/lib/auth";
 
 const prisma = new PrismaClient();
 
-async function p2pTrans() {
-  const session = await getServerSession(authOptions);
-  if (!session?.user?.id) {
-    console.error("User not authenticated");
-    return [];
-  }
-  const p2p = await prisma.p2pTransfer.findMany({
+async function getP2pTransfers(userId: number) {
+  const transfers = await prisma.p2pTransfer.findMany({
     where: {
-      fromUserId: Number(session?.user?.id),
+      OR: [{ fromUserId: userId }, { toUserId: userId }],
     },
     orderBy: {
       timestamp: "desc",
     },
   });
-  return p2p;
+
+  return transfers.map((transfer) => ({
+    ...transfer,
+    isSent: transfer.fromUserId === userId,
+  }));
 }
 
-// eslint-disable-next-line react/display-name
-export default async function () {
-  const p2pTransaction = await p2pTrans();
+export default async function Page() {
+  const session = await getServerSession(authOptions);
 
-  if (!p2pTransaction || p2pTransaction.length === 0) {
+  if (!session?.user?.id) {
+    return <div>You need to be authenticated to view this page</div>;
+  }
+
+  const p2pTransfers = await getP2pTransfers(Number(session.user.id));
+
+  if (!p2pTransfers || p2pTransfers.length === 0) {
     return <div>No transactions found</div>;
   }
 
   return (
     <div className="w-full mt-4 mr-4 flex gap-y-3 flex-col">
-      {p2pTransaction.map((item: any) => (
-        <P2pCards item={item} />
+      {p2pTransfers.map((item) => (
+        <P2pCards key={item.id} item={item} />
       ))}
     </div>
   );

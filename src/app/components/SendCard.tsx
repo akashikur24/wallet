@@ -11,8 +11,8 @@ interface SendCardProps {
   setPaymentModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function SendCard({ setPaymentModal }: SendCardProps) {
-  const [number, setNumber] = useState<string>("");
+export function SendCard({ setPaymentModal, paymentNumber }: SendCardProps) {
+  const [number, setNumber] = useState<string>(paymentNumber);
   const [amount, setAmount] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -42,11 +42,13 @@ export function SendCard({ setPaymentModal }: SendCardProps) {
                 placeholder="Number"
                 label="Number"
                 onChange={setNumber}
+                value={number}
               />
               <TextInput
                 placeholder="Amount"
                 label="Amount"
                 onChange={setAmount}
+                value={amount}
               />
               <div className="pt-4 flex justify-center">
                 <Button loading={loading} onClick={handleSend}>

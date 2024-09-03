@@ -2,7 +2,6 @@
 
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth";
-import axios from "axios";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -28,14 +27,6 @@ export async function createOnRampTransaction(
       amount: amount * 100,
     },
   });
-  await axios
-    .post(`${process.env.NEXTAUTH_URL}/api/bank-webhook`, {
-      token: token,
-      user_identifier: Number(session?.user?.id),
-      amount: amount * 100,
-    })
-    .then((res) => res.data == "Captured")
-    .catch((err) => console.log(err));
 
   return {
     message: "Done",
