@@ -9,6 +9,7 @@ import { p2pTransfer } from "../lib/actions/p2pTransfer";
 
 interface SendCardProps {
   setPaymentModal: React.Dispatch<React.SetStateAction<boolean>>;
+  paymentNumber: string;
 }
 
 export function SendCard({ setPaymentModal, paymentNumber }: SendCardProps) {
