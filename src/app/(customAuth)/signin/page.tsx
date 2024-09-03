@@ -21,6 +21,7 @@ const Signin = () => {
     });
     if (result?.ok) {
       setLoading((prev) => !prev);
+      router.refresh();
       router.push("/dashboard");
     } else {
       setLoading((prev) => !prev);
