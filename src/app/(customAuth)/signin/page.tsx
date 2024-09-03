@@ -32,12 +32,14 @@ const Signin = () => {
     <div className="flex justify-center items-center">
       <div className="w-1/3 flex flex-col gap-y-4">
         <TextInput
+          type="text"
           value={number}
           placeholder={"Enter your number"}
           onChange={setNumber}
           label="Enter your number"
         />
         <TextInput
+          type="password"
           value={password}
           placeholder={"Enter your password"}
           onChange={setPassword}
@@ -47,7 +49,10 @@ const Signin = () => {
         <Button onClick={handleSubmit} loading={loading}>
           {"click"}
         </Button>
-        <p onClick={() => router.push("/signup")} className="cursor-pointer">
+        <p
+          onClick={() => router.push("/signup")}
+          className="cursor-pointer text-gray-500 hover:text-[#6a51a6]"
+        >
           Click to signup
         </p>
       </div>

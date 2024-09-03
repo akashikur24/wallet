@@ -49,6 +49,7 @@ export default function UserSearchComponent() {
     >
       <div>
         <TextInput
+          type="text"
           value={search}
           placeholder={"Search the person name or phone number"}
           onChange={setSearch}

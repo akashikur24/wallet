@@ -10,6 +10,7 @@ type PaymentInfo = {
 };
 
 export const POST = async (req: NextRequest) => {
+  console.log("hi");
   try {
     const body: PaymentInfo = await req.json();
     const { token, user_identifier, amount } = body;
@@ -35,13 +36,23 @@ export const POST = async (req: NextRequest) => {
     });
 
     if (!userBalance) {
-      await prisma.balance.create({
-        data: {
-          userId: Number(user_identifier),
-          amount: Number(amount),
-          locked: 0,
-        },
-      });
+      await prisma.$transaction([
+        prisma.balance.create({
+          data: {
+            userId: Number(user_identifier),
+            amount: Number(amount),
+            locked: 0,
+          },
+        }),
+        prisma.onRampTransaction.update({
+          where: {
+            token: token,
+          },
+          data: {
+            status: "Success",
+          },
+        }),
+      ]);
     } else {
       await prisma.$transaction([
         prisma.balance.update({

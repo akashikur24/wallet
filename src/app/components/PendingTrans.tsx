@@ -29,11 +29,12 @@ const PendingTrans: React.FC<PendingTransProps> = ({
       const response = await axios.post(`/api/bank-webhook`, {
         token: transaction.token,
         user_identifier: Number(session?.user?.id),
-        amount: transaction.amount * 100,
+        amount: transaction.amount,
       });
-
-      if (response.data === "Captured") {
+      console.log(response);
+      if (response.data.message === "Captured") {
         alert("Transaction completed");
+        window.location.reload();
       } else {
         alert("Transaction not captured");
       }

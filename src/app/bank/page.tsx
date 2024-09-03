@@ -24,7 +24,9 @@ const Page = async () => {
 
   return (
     <div className="mx-10">
-      <h1>Pending Transactions</h1>
+      <h1 className="text-3xl text-[#6a51a6] font-bold pt-8 mb-8">
+        Pending Transactions
+      </h1>
       {pendingTransactions.length > 0 ? (
         <table className="w-full table-auto">
           <thead>

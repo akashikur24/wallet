@@ -39,24 +39,28 @@ const Signup = () => {
     <div className="flex justify-center items-center">
       <div className="w-1/3 flex flex-col gap-y-4">
         <TextInput
+          type="text"
           value={name}
           placeholder={"Enter your name"}
           onChange={setName}
           label="Enter your name"
         />
         <TextInput
+          type="text"
           value={email}
           placeholder={"Enter your Email"}
           onChange={setEmail}
           label="Enter your Email"
         />
         <TextInput
+          type="password"
           value={password}
           placeholder={"Enter your Password"}
           onChange={setPassword}
           label="Enter your Password"
         />
         <TextInput
+          type="text"
           value={phone}
           placeholder={"Enter your Number"}
           onChange={setPhone}
@@ -67,7 +71,10 @@ const Signup = () => {
           onClick={handleSumit}
           loading={loading}
         ></Button>
-        <p onClick={() => router.push("/signin")} className="cursor-pointer">
+        <p
+          onClick={() => router.push("/signin")}
+          className="cursor-pointer hover:text-[#6a51a6]"
+        >
           Click to Signin
         </p>
       </div>

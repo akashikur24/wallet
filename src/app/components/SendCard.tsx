@@ -20,7 +20,8 @@ export function SendCard({ setPaymentModal, paymentNumber }: SendCardProps) {
   const handleSend = async () => {
     setLoading(true);
     try {
-      await p2pTransfer(number, Number(amount) * 100);
+      await p2pTransfer(number, Number(amount));
+      window.location.reload();
     } catch (error) {
       console.error("Error during transfer:", error);
     } finally {
@@ -40,12 +41,14 @@ export function SendCard({ setPaymentModal, paymentNumber }: SendCardProps) {
           <Card title="Send">
             <div className="min-w-72 pt-2">
               <TextInput
+                type="text"
                 placeholder="Number"
                 label="Number"
                 onChange={setNumber}
                 value={number}
               />
               <TextInput
+                type="text"
                 placeholder="Amount"
                 label="Amount"
                 onChange={setAmount}

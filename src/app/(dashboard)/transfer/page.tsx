@@ -15,7 +15,7 @@ export interface OnRampTransaction {
   userId: number;
 }
 
-async function getBalance() {
+export async function getBalance() {
   const session = await getServerSession(authOptions);
   if (!session || !session.user || !session.user.id) {
     redirect("/");

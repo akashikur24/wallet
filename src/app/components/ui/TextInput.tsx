@@ -5,11 +5,13 @@ export const TextInput = ({
   onChange,
   label,
   value,
+  type,
 }: {
   placeholder: string;
   onChange: (value: string) => void;
   label: string;
   value: string;
+  type: string;
 }) => {
   return (
     <div className="pt-2">
@@ -18,7 +20,7 @@ export const TextInput = ({
       </label>
       <input
         onChange={(e) => onChange(e.target.value)}
-        type="text"
+        type={type}
         value={value}
         id="first_name"
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
