@@ -39,21 +39,25 @@ const Signup = () => {
     <div className="flex justify-center items-center">
       <div className="w-1/3 flex flex-col gap-y-4">
         <TextInput
+          value={name}
           placeholder={"Enter your name"}
           onChange={setName}
           label="Enter your name"
         />
         <TextInput
+          value={email}
           placeholder={"Enter your Email"}
           onChange={setEmail}
           label="Enter your Email"
         />
         <TextInput
+          value={password}
           placeholder={"Enter your Password"}
           onChange={setPassword}
           label="Enter your Password"
         />
         <TextInput
+          value={phone}
           placeholder={"Enter your Number"}
           onChange={setPhone}
           label="Enter your Number"

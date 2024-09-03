@@ -7,8 +7,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const Signin = () => {
-  const [number, setNumber] = useState<string>();
-  const [password, setPassword] = useState<String>();
+  const [number, setNumber] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
@@ -32,11 +32,13 @@ const Signin = () => {
     <div className="flex justify-center items-center">
       <div className="w-1/3 flex flex-col gap-y-4">
         <TextInput
+          value={number}
           placeholder={"Enter your number"}
           onChange={setNumber}
           label="Enter your number"
         />
         <TextInput
+          value={password}
           placeholder={"Enter your password"}
           onChange={setPassword}
           label="Enter your password"
